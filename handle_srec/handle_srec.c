@@ -80,6 +80,10 @@ uint8_t convert_to_srec(SREC *record, char *arr, uint32_t line) {
                 | (digit_to_hex(arr[5]) << 8) | (digit_to_hex(arr[6]) << 4)
                 | digit_to_hex(arr[7]);
         record->data_len = record->byte_count - 3;
+        if (record->type == S9 && record->byte_count != 3){
+            printf("Error: Byte count S9 error\n");
+            return 1;
+        }
         break;
     case S2:
     case S6:
@@ -90,6 +94,10 @@ uint8_t convert_to_srec(SREC *record, char *arr, uint32_t line) {
                 | (digit_to_hex(arr[7]) << 8) | (digit_to_hex(arr[8]) << 4)
                 | digit_to_hex(arr[9]);
         record->data_len = record->byte_count - 4;
+        if (record->type == S8 && record->byte_count != 4){
+            printf("Error: Byte count S8 error\n");
+            return 1;
+        }
         break;
     case S3:
     case S7:
@@ -100,6 +108,10 @@ uint8_t convert_to_srec(SREC *record, char *arr, uint32_t line) {
                 | (digit_to_hex(arr[9]) << 8) | (digit_to_hex(arr[10]) << 4)
                 | digit_to_hex(arr[11]);
         record->data_len = record->byte_count - 5;
+        if (record->type == S7 && record->byte_count != 5){
+            printf("Error: Byte count S7 error\n");
+            return 1;
+        }
         break;
         /* S4 record ignored */
     default:
