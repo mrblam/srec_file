@@ -26,27 +26,19 @@ typedef enum {
     S9
 } srec_type;
 
-typedef enum {
-    NO_ERROR = 0,
-    BAD_FORMAT,
-    BAD_RECORD,
-    BAD_CKECKSUM,
-    BAD_COUNT,
-} Result;
-
 typedef struct SREC_t SREC;
-struct SREC_t{
-    char        header;
-    srec_type   type;
-    uint8_t     byte_count;
-    uint8_t     data_len;
-    uint8_t     data_offset;
-    uint32_t    address;
-    uint8_t     data[32];
-    uint8_t     check_sum;
+struct SREC_t {
+    char header;
+    srec_type type;
+    uint8_t byte_count;
+    uint8_t data_len;
+    uint8_t data_offset;
+    uint32_t address;
+    uint8_t data[32];
+    uint8_t check_sum;
 };
-/*****************/
-uint8_t convert_to_srec(SREC* record ,char* arr,uint32_t line);
+/*******Declare**********/
+uint8_t convert_to_srec(SREC *record, char *arr, uint32_t line);
 uint8_t write_data_to_file(FILE *file, SREC *record);
-uint8_t digit_to_hex(const char hex);
+
 #endif /* HANDLE_SREC_HANDLE_SREC_H_ */
